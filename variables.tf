@@ -307,6 +307,11 @@ variable "node_pools" {
   See https://cloud.google.com/compute/docs/gpus & https://cloud.google.com/compute/docs/machine-resource#gpus
 
   node_metadatas: Map of Compute Engine instance metadata (key-values) to be applied to all nodes in a nodepool. Instance metadata can be used to configure the behavior of the nodes / VM instances.
+
+  network_config: (Optional) Specifies the network configuration for the pool. Use this if you want to override the cluster’s default network configuration.
+
+  oauth_scopes: (Optional) Use if you want to override the default https://www.googleapis.com/auth/cloud-platform scope when creating node pools.
+
   EOT
   type = list(object({
     node_pool_name             = string
@@ -330,6 +335,7 @@ variable "node_pools" {
     gpu_type                   = map(string)
     kubelet_config             = object({ cpu_cfs_quota = bool, cpu_manager_policy = string, pod_pids_limit = number })
     network_config             = object({ pod_range = string })
+    oauth_scopes               = list(string)
   }))
   default = [{
     node_pool_name             = "gkenp-a"
@@ -353,6 +359,7 @@ variable "node_pools" {
     gpu_type                   = null
     kubelet_config             = null
     network_config             = null
+    oauth_scopes               = null
   }]
 }
 
