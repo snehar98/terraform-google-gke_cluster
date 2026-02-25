@@ -346,7 +346,7 @@ variable "node_pools" {
     kubelet_config             = any
     network_config             = object({ pod_range = string })
     oauth_scopes               = list(string)
-    node_locations             = optional(list(string), null)
+    node_locations             = any
   }))
   default = [{
     node_pool_name             = "gkenp-a"
