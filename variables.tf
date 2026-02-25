@@ -375,6 +375,12 @@ variable "node_pools" {
   }]
 }
 
+variable "node_pool_locations" {
+  description = "Map of node pool name to zone letters for zone pinning (e.g. {\"spot-np\" = [\"a\"]}). When a pool name is present, it overrides the pool's node_locations field. Empty map means all pools inherit cluster-level node locations."
+  type        = map(list(string))
+  default     = {}
+}
+
 variable "cluster_logging_service" {
   description = "The logging service that the cluster should write logs to. Available options include \"logging.googleapis.com\" (Legacy Stackdriver), \"logging.googleapis.com/kubernetes\" (Stackdriver Kubernetes Engine Logging), and \"none\"."
   type        = string
